@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 .venv/
 env/
+Boston_House_Price_Prediction/venv/
+Boston_House_Price_Prediction/__pycache__/
