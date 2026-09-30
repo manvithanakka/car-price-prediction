@@ -11,71 +11,27 @@ st.set_page_config(
     layout="wide"
 )
 
+# SIDEBAR
 st.sidebar.title("🤖 ML Prediction Hub")
 
-project = st.sidebar.radio(
-    "Select Project",
+project = st.sidebar.selectbox(
+    "Choose a Project",
     [
         "🚗 Car Selling Price Prediction",
         "🏠 Boston House Price Prediction"
     ]
 )
 
+# =====================================================
+# CAR PRICE PREDICTION
+# =====================================================
+
 if project == "🚗 Car Selling Price Prediction":
 
+    st.title("🚗 Car Selling Price Predictor")
+    st.write("Machine Learning based used-car price prediction")
+
     model = joblib.load("car_price_model.pkl")
-
-    st.markdown("""
-    <style>
-    .title {
-        text-align: center;
-        font-size: 42px;
-        font-weight: bold;
-    }
-
-    .subtitle {
-        text-align: center;
-        font-size: 18px;
-        color: #666666;
-    }
-
-    .result {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        padding: 30px;
-        border-radius: 18px;
-        text-align: center;
-        color: white;
-        margin-top: 25px;
-    }
-
-    .result-title {
-        font-size: 20px;
-    }
-
-    .result-price {
-        font-size: 40px;
-        font-weight: bold;
-    }
-
-    .footer {
-        text-align: center;
-        color: #777777;
-        margin-top: 40px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-    st.markdown(
-        '<div class="title">🚗 Car Selling Price Predictor</div>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        '<div class="subtitle">Machine Learning based used-car price prediction</div>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown("---")
 
     st.subheader("🚘 Enter Car Details")
 
@@ -132,16 +88,7 @@ if project == "🚗 Car Selling Price Prediction":
 
     st.markdown("---")
 
-    center = st.columns([1, 2, 1])
-
-    with center[1]:
-
-        predict = st.button(
-            "🔮 Predict Selling Price",
-            use_container_width=True
-        )
-
-    if predict:
+    if st.button("🔮 Predict Selling Price", use_container_width=True):
 
         input_data = pd.DataFrame({
             "Year": [year],
@@ -156,14 +103,8 @@ if project == "🚗 Car Selling Price Prediction":
 
         prediction = model.predict(input_data)[0]
 
-        st.markdown(
-            f"""
-            <div class="result">
-                <div class="result-title">Estimated Selling Price</div>
-                <div class="result-price">₹{prediction:.2f} Lakhs</div>
-            </div>
-            """,
-            unsafe_allow_html=True
+        st.success(
+            f"🚗 Estimated Selling Price: ₹{prediction:.2f} Lakhs"
         )
 
     st.markdown("---")
@@ -182,31 +123,32 @@ if project == "🚗 Car Selling Price Prediction":
         st.metric("Test Records", "61")
 
     st.info(
-        "The model was trained using vehicle year, showroom price, "
-        "kilometers driven, fuel type, seller type, transmission, "
-        "and previous owners."
+        "The model uses vehicle year, showroom price, kilometers driven, "
+        "fuel type, seller type, transmission and previous owners."
     )
 
-    st.markdown(
-        '<div class="footer">Built using Python, Pandas, Scikit-learn and Streamlit 🚗</div>',
-        unsafe_allow_html=True
-    )
+
+# =====================================================
+# BOSTON HOUSE PRICE PREDICTION
+# =====================================================
 
 else:
 
     st.title("🏠 Boston House Price Prediction")
-
     st.write(
-        "Enter the house-related features below to predict the house price."
+        "Machine Learning based Boston house price prediction"
     )
 
+    # LOAD BOSTON DATASET
     df = pd.read_csv(
         "Boston_House_Price_Prediction/data/Boston.csv"
     )
 
+    # FEATURES AND TARGET
     X = df.drop("MEDV", axis=1)
     y = df["MEDV"]
 
+    # TRAIN TEST SPLIT
     X_train, X_test, y_train, y_test = train_test_split(
         X,
         y,
@@ -214,14 +156,16 @@ else:
         random_state=42
     )
 
-    boston_model = RandomForestRegressor(
+    # MODEL
+    model = RandomForestRegressor(
         n_estimators=100,
         random_state=42
     )
 
-    boston_model.fit(X_train, y_train)
+    model.fit(X_train, y_train)
 
-    y_pred = boston_model.predict(X_test)
+    # EVALUATION
+    y_pred = model.predict(X_test)
 
     mae = mean_absolute_error(y_test, y_pred)
     mse = mean_squared_error(y_test, y_pred)
@@ -237,13 +181,18 @@ else:
     for i, column in enumerate(X.columns):
 
         if i % 2 == 0:
+
             with col1:
+
                 inputs[column] = st.number_input(
                     column,
                     value=float(X[column].median())
                 )
+
         else:
+
             with col2:
+
                 inputs[column] = st.number_input(
                     column,
                     value=float(X[column].median())
@@ -251,20 +200,14 @@ else:
 
     st.markdown("---")
 
-    center = st.columns([1, 2, 1])
-
-    with center[1]:
-
-        predict_house = st.button(
-            "🔮 Predict House Price",
-            use_container_width=True
-        )
-
-    if predict_house:
+    if st.button(
+        "🔮 Predict House Price",
+        use_container_width=True
+    ):
 
         input_data = pd.DataFrame([inputs])
 
-        prediction = boston_model.predict(input_data)[0]
+        prediction = model.predict(input_data)[0]
 
         st.success(
             f"🏠 Predicted House Price: ${prediction:.2f}k"
