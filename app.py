@@ -1,4 +1,3 @@
-```python
 import streamlit as st
 import pandas as pd
 import joblib
@@ -6,14 +5,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-# ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="ML Prediction Hub",
     page_icon="🤖",
     layout="wide"
 )
 
-# ---------------- SIDEBAR ----------------
 st.sidebar.title("🤖 ML Prediction Hub")
 
 project = st.sidebar.radio(
@@ -24,19 +21,16 @@ project = st.sidebar.radio(
     ]
 )
 
-# ============================================================
-#                    CAR PRICE PREDICTION
-# ============================================================
+# ==========================================================
+# CAR PRICE PREDICTION
+# ==========================================================
 
 if project == "🚗 Car Selling Price Prediction":
 
-    # ---------------- LOAD CAR MODEL ----------------
     model = joblib.load("car_price_model.pkl")
 
-    # ---------------- CUSTOM CSS ----------------
     st.markdown("""
     <style>
-
     .main {
         background-color: #f5f7fb;
     }
@@ -78,11 +72,9 @@ if project == "🚗 Car Selling Price Prediction":
         color: #777777;
         margin-top: 40px;
     }
-
     </style>
     """, unsafe_allow_html=True)
 
-    # ---------------- HEADER ----------------
     st.markdown(
         '<div class="title">🚗 Car Selling Price Predictor</div>',
         unsafe_allow_html=True
@@ -95,7 +87,6 @@ if project == "🚗 Car Selling Price Prediction":
 
     st.markdown("---")
 
-    # ---------------- INPUT SECTION ----------------
     st.subheader("🚘 Enter Car Details")
 
     col1, col2 = st.columns(2)
@@ -146,37 +137,4 @@ if project == "🚗 Car Selling Price Prediction":
 
         transmission = st.selectbox(
             "⚙️ Transmission",
-            ["Manual", "Automatic"]
-        )
-
-    st.markdown("---")
-
-    # ---------------- PREDICTION ----------------
-    center = st.columns([1, 2, 1])
-
-    with center[1]:
-
-        predict = st.button(
-            "🔮 Predict Selling Price",
-            use_container_width=True
-        )
-
-    if predict:
-
-        input_data = pd.DataFrame({
-            "Year": [year],
-            "Present_Price": [present_price],
-            "Kms_Driven": [kms_driven],
-            "Owner": [owner],
-            "Fuel_Type_Diesel": [fuel_type == "Diesel"],
-            "Fuel_Type_Petrol": [fuel_type == "Petrol"],
-            "Seller_Type_Individual": [seller_type == "Individual"],
-            "Transmission_Manual": [transmission == "Manual"]
-        })
-
-        prediction = model.predict(input_data)[0]
-
-        st.markdown(
-            f"""
-            <div class="result">
-                <
+           
