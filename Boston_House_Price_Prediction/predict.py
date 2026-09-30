@@ -14,7 +14,7 @@ st.title("🏠 Boston House Price Prediction")
 st.write("Enter the house-related features below to predict the house price.")
 
 # Load dataset
-df = pd.read_csv("data/Boston.csv")
+df = pd.read_csv("Boston_House_Price_Prediction/data/Boston.csv")
 
 # Separate features and target
 X = df.drop("MEDV", axis=1)
