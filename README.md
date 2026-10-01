@@ -2,36 +2,42 @@
 
 🚀 **Live Demo :** https://manvitha-car-price-predictor.streamlit.app/
 
-# 🚗 Car Selling Price Prediction
+# 🤖 ML Prediction Hub
 
-A Machine Learning application that predicts the selling price of a used car based on its features.
+🚀 **Live Demo:** [https://manvitha-car-price-predictor.streamlit.app/](https://manvitha-car-price-predictor.streamlit.app/)
 
-## Features
+---
 
-- Manufacturing Year
-- Present/Showroom Price
-- Kilometers Driven
-- Fuel Type
-- Seller Type
-- Transmission
-- Previous Owners
+## 📌 About the Project
 
-## Machine Learning Model
+This repository contains a collection of Machine Learning projects focused on solving real-world prediction problems using data preprocessing, regression techniques, model training, and evaluation.
 
-Random Forest Regression
+The projects are integrated into a single **Streamlit-based ML Prediction Hub**, providing an interactive platform where users can select a prediction task, enter the required inputs, and obtain predictions in real time.
 
-## Dataset
+### 🚗 Car Selling Price Prediction
 
-301 car records
+The Car Selling Price Prediction project estimates the resale value of a used car based on important factors such as **manufacturing year, showroom price, kilometers driven, fuel type, seller type, transmission, and previous owners**.
 
-- Training records: 240
-- Testing records: 61
+A **Random Forest Regression** model is trained on historical vehicle data after preprocessing and transforming categorical features. The model is evaluated using **Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and R² Score**.
 
-## Model Performance
+### 🏠 Boston House Price Prediction
 
-R² Score: 0.9652
+The Boston House Price Prediction project estimates residential property prices using various housing-related characteristics such as **crime rate, number of rooms, accessibility, taxation-related factors, and other relevant features**.
 
-## Technologies Used
+The project follows a complete Machine Learning workflow including **data preprocessing, train-test splitting, model training, prediction, and performance evaluation** using a Random Forest Regression model.
+
+### 🔑 Key Features
+
+- 🚗 Used-car selling price prediction
+- 🏠 Boston house price prediction
+- 🤖 Random Forest Regression
+- 📊 Data preprocessing and feature transformation
+- 📈 Model performance evaluation
+- 🔮 Real-time predictions
+- 🖥️ Interactive Streamlit web application
+- 🔗 Both projects accessible through a single live application
+
+### 🛠️ Technologies Used
 
 - Python
 - Pandas
@@ -40,9 +46,31 @@ R² Score: 0.9652
 - Joblib
 - Streamlit
 
-## How to Run
+## 📂 Project Structure
 
-Install dependencies:
+```text
+car-price-prediction/
+│
+├── app.py
+├── train_model.py
+├── dataset.csv
+├── car_price_model.pkl
+├── requirements.txt
+├── README.md
+│
+└── Boston_House_Price_Prediction/
+    ├── data/
+    ├── train.py
+    ├── predict.py
+    └── requirements.txt
+```
 
-```bash
-pip install -r requirements.txt
+## 📊 Machine Learning Workflow
+
+**Data Collection → Data Preprocessing → Feature Transformation → Train-Test Split → Model Training → Prediction → Performance Evaluation → Streamlit Deployment**
+
+## 🌐 Deployment
+
+The projects are deployed together using **Streamlit**, allowing users to access both prediction applications through a single web interface.
+
+🚀 **Live Demo:** [ML Prediction Hub](https://manvitha-car-price-predictor.streamlit.app/)
