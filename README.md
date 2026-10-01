@@ -2,12 +2,6 @@
 
 🚀 **Live Demo :** https://manvitha-car-price-predictor.streamlit.app/
 
-# 🤖 ML Prediction Hub
-
-🚀 **Live Demo:** [https://manvitha-car-price-predictor.streamlit.app/](https://manvitha-car-price-predictor.streamlit.app/)
-
----
-
 ## 📌 About the Project
 
 This repository contains a collection of Machine Learning projects focused on solving real-world prediction problems using data preprocessing, regression techniques, model training, and evaluation.
